@@ -1,7 +1,10 @@
 # Due Diligence checker
 
 ## Current workflow
-- TODO
+- I want to start using a new dependency from PyPI
+- Go to PyPI and search the package
+- Look for the link to source and mention of license
+- If there is no link to 
 
 ## The Problem
 Why
@@ -22,10 +25,4 @@ Result:
 - I need a recommendation on the level of good / iffy / bad, and a reasoning for that
 - I need to highlight absolute no-gos like missing licenses or prohibitive license, really old releases and lax maintenance schedule.
 - For the bad dependencies the actions taken are to find a better replacement or to decide if to write the functionality without a dependency.
-
-
-
-
-
-
 
