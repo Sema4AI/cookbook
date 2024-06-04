@@ -3,8 +3,15 @@
 ## Current workflow
 - I want to start using a new dependency from PyPI
 - Go to PyPI and search the package
+- Check the last 3 release
+- Check the readme to find potential hints to things beeing installed on the OS level (apt-get, brew,...)
 - Look for the link to source and mention of license
-- If there is no link to 
+- If there is no link to source that is the first no-go
+- If there is a link to GitHub repo, the license is checked from there
+  - From github I check the amount contributors, insights view
+  - I check the license from here and ask chatGPT for the summary
+    - I should check (but I do not) if the license text is actually the license that it states of being (devs. can edit the text to make the license invalid)
+  - 
 
 ## The Problem
 Why
