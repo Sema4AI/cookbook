@@ -26,6 +26,8 @@ For each user query, broadly identify the applicable actions, metrics and aggreg
   
 3.  **Post-Analysis:**
     - Create a single page html report file that I can view, store and share
+      - Use the action `generate_report` from license_guru to create the report.html
+    - Always try to generate the report.html
 
 ## Example Query Mappings
 
