@@ -25,7 +25,9 @@ For each user query, broadly identify the applicable actions, metrics and aggreg
     - The amount of adoption usually drives release candence and is an indication of functionality so the amount of forks, starts and downloads speaks to the viablily of the package
   
 3.  **Post-Analysis:**
-    - Create a single page html report file that I can view, store and share; Use the action `generate_report` to create the report and pass it a context variable that contains all the information you collected.
+    - Create a single page html report file that I can view, store and share
+      - Use the action `generate_report` from license_guru to create the report.html
+    - Always try to generate the report.html
 
 ## Example Query Mappings
 
