@@ -24,23 +24,27 @@ def get_metadata(package_name: str) -> str:
     resp = requests.get(f"https://pypi.org/pypi/{package_name}/json")
     resp.raise_for_status()
     data = resp.json()
-    last_versions = list(data)[-3:]
+    last_versions = list(data["releases"])[-3:]
     releases = []
-    for version in last_versions:
-        releases.append({version: data["releases"][version][0]["upload_time_iso_8601"]})
-    return {
-        "license": data["info"]["license"],
-        "name": data["info"]["name"],
-        "package_url": data["info"]["package_url"],
-        "project_url": data["info"]["project_url"],
-        "project_urls": data["info"]["project_urls"],
-        "changelog": data["info"]["changelog"],
-        "homepage": data["info"]["homepage"],
-        "repository": data["info"]["repository"],
-        "summary": data["info"]["summary"],
-        "version": data["info"]["version"],
-        "releases": releases,
-    }
+    try:
+        for version in last_versions:
+            releases.append(
+                {version: data["releases"][version][0]["upload_time_iso_8601"]}
+            )
+    except KeyError:
+        pass
+    return json.dumps(
+        {
+            "license": data.get("info", {}).get("license"),
+            "name": data.get("info", {}).get("name"),
+            "package_url": data.get("info", {}).get("package_url"),
+            "project_url": data.get("info", {}).get("project_url"),
+            "project_urls": data.get("info", {}).get("project_urls"),
+            "summary": data.get("info", {}).get("summary"),
+            "version": data.get("info", {}).get("version"),
+            "releases": releases,
+        }
+    )
 
 
 @action
