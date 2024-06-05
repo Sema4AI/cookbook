@@ -1,21 +1,21 @@
 # Required: A short name for the action package
-name: Package name
+name: Dependency Due Diligenge Actions
 
 # Required: A description of what's in the action package.
-description: Action package description
+description: Extract data for due diligence checks for dependencies
 
 # Required: A link to where the documentation on the package lives.
 documentation: https://github.com/...
 
 dependencies:
   conda-forge:
-    - python=3.10.12
-    - uv=0.1.37
+  - python=3.10.12
+  - uv=0.2.5
   pypi:
-    - sema4ai-actions=0.5.0
-    - requests=2.32.3
-    - beautifulsoup4=4.12.3
-    - anthropic=0.21.3
+  - sema4ai-actions=0.9.1
+  - requests=2.32.3
+  - beautifulsoup4=4.12.3
+  - anthropic=0.21.3
 
 packaging:
   # This section is optional.
