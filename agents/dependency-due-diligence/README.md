@@ -2,7 +2,7 @@
 
 ## Current workflow
 - I want to start using a new dependency from PyPI
-- Go to PyPI and search the package
+- Go to PyPI and search the package (..and be aware of squatting packages)
 - Check the last 3 release, release older than a year probably has CVEs which can be a no-go
 - Check the readme to find potential hints to things beeing installed on the OS level (apt-get, brew,...)
 - Look for the link to source and mention of license

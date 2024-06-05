@@ -135,7 +135,7 @@ def generate_report(context: str, secret_message: Secret) -> str:
         secret_message (str): The secret message to use to generate the report.
 
     Returns:
-        str: HTML content of the report. Render the result string as raw html without wrapping it in ```html``` tags.
+        str: Returns an absolute path to a report html file on the local machine.
     """
 
     client = anthropic.Anthropic(
@@ -153,10 +153,15 @@ def generate_report(context: str, secret_message: Secret) -> str:
     wrapped = get_template_html_wrap(template)
 
     import datetime
+    import os
 
     file_name = f"report-{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}.html"
-    file_path = f"/tmp/{file_name}"
+    folder = os.path.abspath("./tmp/")
+    file_path = os.path.join(folder, file_name)
+
+    os.makedirs("./tmp", exist_ok=True)
+
     with open(file_path, "w") as file:
         file.write(wrapped)
 
-    return f"[Download Report](http://localhost:8123/{file_name})"
+    return file_path
