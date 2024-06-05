@@ -1,11 +1,14 @@
+from reports import generate_template, get_template_html_wrap, content_mock
+from sema4ai.actions import action, Secret
+from bs4 import BeautifulSoup
+import anthropic
+import requests
 import json
 from urllib.parse import urlparse
 
-import requests
-from bs4 import BeautifulSoup
-from sema4ai.actions import action
 
 API_URL = "https://api.github.com"
+
 
 @action
 def get_metadata(package_name: str) -> str:
@@ -42,7 +45,7 @@ def parse_snyk(package_name: str) -> str:
     content = soup.find_all("div", class_="package-container")
     if len(content) == 0:
         return "No content was found"
-    return content[0]
+    return str(content[0])
 
 
 @action
@@ -56,8 +59,8 @@ def get_repository(github_url: str) -> str:
         str: json response of repository info.
     """
     parsed_url = urlparse(github_url)
-    path_parts = parsed_url.path.strip('/').split('/')
-    
+    path_parts = parsed_url.path.strip("/").split("/")
+
     if len(path_parts) >= 2:
         owner = path_parts[0]
         repo = path_parts[1]
@@ -74,6 +77,7 @@ def get_repository(github_url: str) -> str:
     data = resp.json()
 
     return json.dumps(data)
+
 
 @action
 def repository_releases(releases_url: str, page: int = 1, limit: int = 5) -> str:
@@ -97,4 +101,44 @@ def repository_releases(releases_url: str, page: int = 1, limit: int = 5) -> str
     data = resp.json()
 
     start_index = (page - 1) * limit
-    return json.dumps(data[start_index:start_index + limit])
+    return json.dumps(data[start_index : start_index + limit])
+
+
+@action
+def generate_report(context: str, secret_message: Secret) -> str:
+    """
+    Genereate a report about python dependencies based on github and synk parsing actions.
+
+    Args:
+        context (str): The context to use to generate the report. This contains report from github and pypi parsing actions
+        secret_message (str): The secret message to use to generate the report.
+
+    Returns:
+        str: HTML content of the report. Render the result string as raw html without wrapping it in ```html``` tags.
+    """
+
+    client = anthropic.Anthropic(
+        api_key=secret_message.value,
+    )
+
+    template = get_template_html_wrap(
+        generate_template(
+            client,
+            f"""Create the report based on the example <context>{context}</context>""",
+            content_mock,
+        )
+    )
+
+    wrapped = get_template_html_wrap(template)
+
+    import datetime
+
+    file_path = f"/tmp/report-{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}.html"
+    with open(file_path, "w") as file:
+        file.write(wrapped)
+
+    return f"""
+    <a href="file://{file_path}" target="_blank">Link to full report</a>
+
+    {template}
+    """
