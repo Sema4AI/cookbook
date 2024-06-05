@@ -60,5 +60,5 @@ Result:
 
 How:
  - Firstly scan the package based on its name and get the PyPi metadata using `get_metadata`
- - Then get the full  PyPi page using `parse_pypi`, the information on the previous step is getting the priority, but data that isn't coming from there, specially Github URL, will be take from this step
- - Last step get the full HTML page from Snyk using `parse_snyk` and add any missing infromation from here, specially the CVE and Security informations
+ - Then get the full Snyk page using `parse_snyk`, the information on the previous step is getting the priority, but data that isn't coming from there, specially Github URL and Security Information and CVEs, will be taken from this step
+ - Last step get the full HTML page from Github using `parse_github` and add any missing infromation from here

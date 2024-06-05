@@ -30,12 +30,32 @@ def parse_snyk(package_name: str) -> str:
         package_name (str): Name of the package to scan
 
     Returns:
-        Returns the HTML page of the package on PyPi that needs to be parsed.
+        Returns the HTML page of the package on Snyk that needs to be parsed.
     """
     resp = requests.get(f"https://snyk.io/advisor/python/{package_name}/")
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text)
     content = soup.find_all("div", class_="package-container")
+    if len(content) == 0:
+        return "No content was found"
+    return content[0]
+
+
+@action
+def parse_github(github_url: str) -> str:
+    """
+    Retrieves the HTML page on Github for the given package.
+
+    Args:
+        github_url (str): Github URL for the scanned package
+
+    Returns:
+        Returns the HTML page of the package on Github that needs to be parsed.
+    """
+    resp = requests.get(github_url)
+    resp.raise_for_status()
+    soup = BeautifulSoup(resp.text)
+    content = soup.find_all("div", class_="Layout-sidebar")
     if len(content) == 0:
         return "No content was found"
     return content[0]
