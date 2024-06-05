@@ -23,7 +23,24 @@ def get_metadata(package_name: str) -> str:
     """
     resp = requests.get(f"https://pypi.org/pypi/{package_name}/json")
     resp.raise_for_status()
-    return json.dumps(resp.json())
+    data = resp.json()
+    last_versions = list(data)[-3:]
+    releases = []
+    for version in last_versions:
+        releases.append({version: data["releases"][version][0]["upload_time_iso_8601"]})
+    return {
+        "license": data["info"]["license"],
+        "name": data["info"]["name"],
+        "package_url": data["info"]["package_url"],
+        "project_url": data["info"]["project_url"],
+        "project_urls": data["info"]["project_urls"],
+        "changelog": data["info"]["changelog"],
+        "homepage": data["info"]["homepage"],
+        "repository": data["info"]["repository"],
+        "summary": data["info"]["summary"],
+        "version": data["info"]["version"],
+        "releases": releases
+    }
 
 
 @action
