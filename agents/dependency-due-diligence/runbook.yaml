@@ -1,0 +1,17 @@
+name: Dependency Due Diligence
+description: ./runbook/description.md
+runbook: ./runbook/runbook.md
+llm_model:
+  provider: OpenAI
+  model: GPT-4 Turbo
+  version: latest
+actions:
+  - name: MyActions/license_guru
+    description: ...
+  - name: sema4ai/search_and_browse
+    description: ...
+  
+tags:
+  - Developer
+  - Dependency management
+  - Supply chain
