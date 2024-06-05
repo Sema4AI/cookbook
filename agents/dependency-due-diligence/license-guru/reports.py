@@ -23,7 +23,7 @@ def get_template_html_wrap(content: str):
 
 def generate_template(client: anthropic.Anthropic, prompt: str, example: str) -> str:
     message = client.messages.create(
-        model="claude-3-opus-20240229",
+        model="claude-3-sonnet-20240229",
         max_tokens=4096,
         temperature=0,
         system=f"""

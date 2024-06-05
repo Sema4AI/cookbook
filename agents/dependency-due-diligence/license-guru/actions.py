@@ -39,7 +39,7 @@ def get_metadata(package_name: str) -> str:
         "repository": data["info"]["repository"],
         "summary": data["info"]["summary"],
         "version": data["info"]["version"],
-        "releases": releases
+        "releases": releases,
     }
 
 
@@ -150,12 +150,9 @@ def generate_report(context: str, secret_message: Secret) -> str:
 
     import datetime
 
-    file_path = f"/tmp/report-{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}.html"
+    file_name = f"report-{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}.html"
+    file_path = f"/tmp/{file_name}"
     with open(file_path, "w") as file:
         file.write(wrapped)
 
-    return f"""
-    <a href="file://{file_path}" target="_blank">Link to full report</a>
-
-    {template}
-    """
+    return f"[Download Report](http://localhost:8123/{file_name})"
