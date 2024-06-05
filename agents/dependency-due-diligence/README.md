@@ -61,4 +61,4 @@ Result:
 How:
  - Firstly scan the package based on its name and get the PyPi metadata using `get_metadata`
  - Then get the full Snyk page using `parse_snyk`, the information on the previous step is getting the priority, but data that isn't coming from there, specially Github URL and Security Information and CVEs, will be taken from this step
- - Last step get the full HTML page from Github using `parse_github` and add any missing infromation from here
+ - Last step will be to get the Github Information, for that you will need to call the `get_repository` with the Github URL and afterwards the `repository_releases` with the `releases_url` property that is included in get_repository return data. These will return all the relevant Github information that needs to be appended to the final report.
