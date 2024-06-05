@@ -15,7 +15,7 @@ def search_repository(query: str, page: int = 1, limit: int = 1) -> str:
         limit (int): Number of results to return
 
     Returns:
-        str: page or section html.
+        str: json list of repositories responses.
     """
 
     url = f"{API_URL}/search/repositories?q={query}&page={page}&limit={limit}"
@@ -29,6 +29,32 @@ def search_repository(query: str, page: int = 1, limit: int = 1) -> str:
     return json.dumps(data.get('items'))
 
 @action
+def get_repository(repo: str, owner: str = "") -> str:
+    """Lookup repositories on github
+
+    Args:
+        repo (str): repo name, can be full or partial if owner specified
+        owner (int): optional owner of repository
+
+    Returns:
+        str: json response of repository info.
+    """
+
+    if owner != "":
+        url = f"{API_URL}/repos/{owner}/{repo}"
+    else:
+        url = f"{API_URL}/repos/{repo}"
+
+    headers = {
+        "Accept": "application/json",
+    }
+
+    resp = requests.get(url, headers=headers)
+    data = resp.json()
+
+    return json.dumps(data)
+
+@action
 def repository_releases(releases_url: str, page: int = 1, limit: int = 5) -> str:
     """Lookup repository releases
 
@@ -38,7 +64,7 @@ def repository_releases(releases_url: str, page: int = 1, limit: int = 5) -> str
         limit (int): Number of results to return
 
     Returns:
-        str: page or section html.
+        str: json response of repository release information.
     """
 
     url = releases_url.replace("{/id}", "")
