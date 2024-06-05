@@ -8,10 +8,14 @@ For each user query, broadly identify the applicable actions, metrics and aggreg
     - Get the license type from GitHub repository as the license in PyPI and the package manager sites can differ from the one next to the sources
       - Summarize the license found to answer the question: "Can I use code under this license and what are the implications?"
     - Get the last 3 releases of the package with version numbers and release dates.
-    - From the source reposiroty get the number of contributors
+    - From the source repository get the number of contributors
     - Get the usage of the package (download statistics etc.) for the package to know the viability of the project.
     - Get the number of forks and stars in the github project
-    - Use actions from: license_guru to find the above information. 
+    - To collect the data use actions from: license_guru 
+      - Firstly scan the package based on its name and get the PyPi metadata using `get_metadata`
+      - Then get the full Snyk page using `parse_snyk`, the information on the previous step is getting the priority, but data that isn't coming from there, specially Github URL and Security Information and CVEs, will be taken from this step
+      - Last step will be to get the Github Information, for that you will need to call the `get_repository` with the Github URL and afterwards the `repository_releases` with the `releases_url` property that is included in get_repository return data. These will return all the relevant Github information that needs to be appended to the final report.
+
 
 2.  **Analysis:**
     - The basis for selecting or rejecting a dependency is a collective analysis over the data.
