@@ -1,6 +1,6 @@
 from io import BytesIO
 from pathlib import Path
-from typing import Literal, Optional
+from typing import Literal, Optional, List
 
 from dotenv import load_dotenv
 from google.oauth2.credentials import Credentials
@@ -12,6 +12,17 @@ from sema4ai.actions import OAuth2Secret, action
 import markdown
 from bs4 import BeautifulSoup
 import pandas as pd
+import requests
+from pydantic import BaseModel
+from datetime import datetime
+
+class AgentConfig(BaseModel):
+    name: str
+    description: str
+    runbook: str
+
+class AgentsInput(BaseModel):
+    agents: List[AgentConfig]
 
 load_dotenv(Path(__file__).absolute().parent / "devdata" / ".env")
 
@@ -418,5 +429,77 @@ def list_runbook_comments(
         return Response(error=f"An error occurred: {error}")
     finally:
         service.close()
+
+@action
+def create_agents(input_data: AgentsInput) -> str:
+    """Creates multiple agents with the given configurations and initializes a welcome thread for each
+
+    Args:
+        input_data (AgentsInput): An instance of AgentsInput containing agent configurations.
+
+    Returns:
+        str: A status message indicating the result of the API calls.
+    """
+    assistant_url = "http://localhost:8100/assistants"
+    thread_url = "http://localhost:8100/threads"
+    responses = []
+    
+    for agent in input_data.agents:
+        runbook_separator = '\nYour instructions are:\n'
+        current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        system_message = (
+            f"You are an assistant with the following name: {agent.name}.\n"
+            f"The current date and time is: {current_datetime}."
+            f"{runbook_separator}{agent.runbook}"
+        )
+
+        body = {
+            "name": agent.name,
+            "config": {
+                "configurable": {
+                    "type": "agent",
+                    "type==agent/agent_type": "GPT 4 Turbo",
+                    "type==agent/interrupt_before_action": False,
+                    "type==agent/retrieval_description": (
+                        "Can be used to look up information that was uploaded to this assistant.\n"
+                        "If the user is referencing particular files, that is often a good hint that information may be here.\n"
+                        "If the user asks a vague question, they are likely meaning to look up info from this retriever, and you should call it!"
+                    ),
+                    "type==agent/system_message": system_message,
+                    "type==agent/description": agent.description,
+                    "type==agent/tools": []
+                }
+            }
+        }
+
+        try:
+            response = requests.post(assistant_url, json=body)
+            response.raise_for_status()
+            assistant_id = response.json().get("assistant_id")
+
+            thread_body = {
+                "assistant_id": assistant_id,
+                "name": "welcome",
+                "starting_message": "Hi! How can I help you today?"
+            }
+
+            thread_response = requests.post(thread_url, json=thread_body, headers={
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            })
+            thread_response.raise_for_status()
+
+            responses.append({"name": agent.name, "status": "Created with welcome thread"})
+        except requests.exceptions.HTTPError as http_err:
+            responses.append({"name": agent.name, "status": f"HTTP error occurred: {http_err}"})
+        except Exception as err:
+            responses.append({"name": agent.name, "status": f"Other error occurred: {err}"})
+    
+    if all(response["status"] == "Created with welcome thread" for response in responses):
+        return "All agents and their welcome threads created successfully."
+    else:
+        error_responses = [response for response in responses if response["status"] != "Created with welcome thread"]
+        return f"Some agents or their welcome threads were not created successfully: {error_responses}"
+
         
         
