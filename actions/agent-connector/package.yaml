@@ -10,9 +10,9 @@ documentation: https://sema4.ai/
 dependencies:
   conda-forge:
   - python=3.10.14
-  - uv=0.2.4
+  - uv=0.2.6
   pypi:
-  - sema4ai-actions=0.9.0
+  - sema4ai-actions=0.9.2
   - requests=2.32.3
 
 packaging:

@@ -1,4 +1,3 @@
-
 # Required: A short name for the action package
 name: Claude Validator
 
@@ -10,9 +9,8 @@ documentation: https://github.com/...
 
 dependencies:
   conda-forge:
-  - python=3.10.12
-  - uv=0.1.37
+  - python=3.10.14
+  - uv=0.2.6
   pypi:
-  - sema4ai-actions=0.3.1
+  - sema4ai-actions=0.9.2
   - anthropic=0.21.3
-
