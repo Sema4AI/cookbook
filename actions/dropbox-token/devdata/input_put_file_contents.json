@@ -1,0 +1,5 @@
+{
+    "dropbox_token": "YOUR_DROPBOX_TOKEN",
+    "remote_path": "/test/file.txt",
+    "file_contents": "First line\nSecond line."
+}
