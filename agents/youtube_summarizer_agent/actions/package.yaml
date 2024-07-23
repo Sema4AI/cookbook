@@ -1,0 +1,28 @@
+# Required: A short name for the action package
+name: Modified YouTube Action
+
+# Required: A description of what's in the action package.
+description: This action package is modifying the current YouTube get_transcript action to get timestamps within the transcript.  Additionally changed the capture group for id to capture more variations of YouTube URLs.
+
+dependencies:
+  conda-forge:
+  - python=3.10.14
+  - uv=0.2.6
+  pypi:
+  - sema4ai-actions=0.9.2
+  - youtube_transcript_api=0.6.2
+  - youtube_search=2.1.2
+
+packaging:
+  # By default, all files and folders in this directory are packaged when uploaded.
+  # Add exclusion rules below (expects glob format: https://docs.python.org/3/library/glob.html)
+  exclude:
+    - ./.git/**
+    - ./.vscode/**
+    - ./devdata/**
+    - ./output/**
+    - ./venv/**
+    - ./.venv/**
+    - ./.DS_store/**
+    - ./**/*.pyc
+    - ./**/*.zip

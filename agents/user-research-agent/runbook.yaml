@@ -1,0 +1,16 @@
+name: User Research Agent
+description: ./runbook/description.md
+runbook: ./runbook/runbook.md
+llm_model:
+  provider: OpenAI
+  model: GPT-4o
+  version: latest
+actions:
+  - name: Google Drive
+  - name: Slack
+tags:
+  - Feedback
+  - Data
+  - Drive
+  - Sheet
+  - Slack
