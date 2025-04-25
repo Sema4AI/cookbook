@@ -1,0 +1,17 @@
+{
+    "inputs": [
+        {
+            "inputName": "input-1",
+            "inputValue": {}
+        }
+    ],
+    "metadata": {
+        "actionName": "get_a_random_joke",
+        "actionRelativePath": "actions.py",
+        "schemaDescription": [],
+        "managedParamsSchemaDescription": {},
+        "inputFileVersion": "v3",
+        "kind": "action",
+        "actionSignature": "action/args: ''"
+    }
+}

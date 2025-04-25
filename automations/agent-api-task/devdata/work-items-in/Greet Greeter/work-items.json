@@ -1,0 +1,10 @@
+[
+  {
+    "payload": {
+      "agent_name": "Greeter Agent",
+      "conversation_name": "Hello World",
+      "prompt": "My name is John Doe"
+    },
+    "files": {}
+  }
+]

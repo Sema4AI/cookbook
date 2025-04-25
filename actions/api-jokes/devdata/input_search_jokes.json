@@ -1,0 +1,21 @@
+{
+    "inputs": [
+        {
+            "inputName": "input-1",
+            "inputValue": {
+                "term": "dad"
+            }
+        }
+    ],
+    "metadata": {
+        "actionName": "search_jokes",
+        "actionRelativePath": "actions.py",
+        "schemaDescription": [
+            "term: string: A term to create a joke about. Use only single words, no sentences."
+        ],
+        "managedParamsSchemaDescription": {},
+        "inputFileVersion": "v3",
+        "kind": "action",
+        "actionSignature": "action/args: 'term: str'"
+    }
+}

@@ -1,0 +1,38 @@
+agent-package:
+  spec-version: v2
+  exclude:
+  - ./.git/**
+  - ./.vscode/**
+  - ./devdata/**
+  - ./output/**
+  - ./venv/**
+  - ./.venv/**
+  - ./**/.env
+  - ./**/.DS_Store
+  - ./**/*.pyc
+  - ./*.zip
+  agents:
+  - name: Dependency Due Diligence Agent
+    description: The Dependency Due Diligence Agent helps developers avoid picking and spending time on taking
+      new dependencies into a project. Figuring out does the license work, is the the project viable, up to date etc.
+      takes time is tidious work with sometimes crucial implications on security. Having an agent providing a total
+      summary and a report is the first step. The agent can then be extended to help the developer find suitable
+      replacements as well.
+    model:
+      provider: OpenAI
+      name: gpt-4o
+    version: 1.0.0
+    architecture: agent
+    reasoning: disabled
+    runbook: runbook.md
+    action-packages:
+    - name: License Guru
+      organization: MyActions
+      version: 0.1.0
+      path: MyActions/license-guru
+      type: folder
+      whitelist: ''
+    knowledge: []
+    metadata:
+      mode: conversational
+

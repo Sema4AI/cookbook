@@ -1,0 +1,11 @@
+actions/__pycache__
+.DS_Store
+/*/.DS_Store
+/*/.env
+/*/*/.env
+/.vscode
+/*/.vscode
+/*/*/.vscode
+.idea
+__pycache__
+metadata.json

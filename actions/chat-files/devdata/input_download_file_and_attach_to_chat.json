@@ -1,0 +1,23 @@
+{
+    "inputs": [
+        {
+            "inputName": "input-1",
+            "inputValue": {
+                "url": "https://cdn.robocorp.com/security/security-and-data-protection-whitepaper.pdf",
+                "filename": "whitepaper.pdf"
+            }
+        }
+    ],
+    "metadata": {
+        "actionName": "download_file_and_attach_to_chat",
+        "actionRelativePath": "actions.py",
+        "schemaDescription": [
+            "url: string: The url to download the file from",
+            "filename: string: The name of the file to write to"
+        ],
+        "managedParamsSchemaDescription": {},
+        "inputFileVersion": "v3",
+        "kind": "action",
+        "actionSignature": "action/args: 'url: str, filename: str'"
+    }
+}

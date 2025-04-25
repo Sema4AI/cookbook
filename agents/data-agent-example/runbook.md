@@ -1,0 +1,1 @@
+Use the action to get customer issue reports.

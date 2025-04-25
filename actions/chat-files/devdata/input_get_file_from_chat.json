@@ -1,0 +1,21 @@
+{
+    "inputs": [
+        {
+            "inputName": "input-1",
+            "inputValue": {
+                "filename": "test.txt"
+            }
+        }
+    ],
+    "metadata": {
+        "actionName": "get_file_from_chat",
+        "actionRelativePath": "actions.py",
+        "schemaDescription": [
+            "filename: string: The name of the file to get from the chat"
+        ],
+        "managedParamsSchemaDescription": {},
+        "inputFileVersion": "v3",
+        "kind": "action",
+        "actionSignature": "action/args: 'filename: str'"
+    }
+}

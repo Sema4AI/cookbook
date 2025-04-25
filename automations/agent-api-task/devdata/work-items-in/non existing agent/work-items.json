@@ -1,0 +1,9 @@
+[
+  {
+    "payload": {
+      "agent_name": "this is a non existing agent name",
+      "prompt": "My name is John Doe"
+    },
+    "files": {}
+  }
+]

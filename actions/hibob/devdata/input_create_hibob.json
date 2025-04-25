@@ -1,0 +1,37 @@
+{
+    "inputs": [
+        {
+            "inputName": "input-1",
+            "inputValue": {
+                "first_name": "",
+                "surname": "",
+                "email": "",
+                "site": "",
+                "start_date": "",
+                "department": "",
+                "api_key": "<specify-secret>"
+            }
+        }
+    ],
+    "metadata": {
+        "actionName": "create_hibob",
+        "actionRelativePath": "actions.py",
+        "schemaDescription": [
+            "first_name: string: Employee's first name.",
+            "surname: string: Employee's surname.",
+            "email: string: Employee's email address.",
+            "site: string: Employee's site",
+            "start_date: string: Employee's start date e.g. 2024-06-22",
+            "department: string: Employee's job department"
+        ],
+        "managedParamsSchemaDescription": {
+            "api_key": {
+                "type": "Secret",
+                "description": "API key for Hibob authentication."
+            }
+        },
+        "inputFileVersion": "v3",
+        "kind": "action",
+        "actionSignature": "action/args: \"first_name: str, surname: str, email: str, site: str, start_date: str, department: str, api_key: Secret=Secret.model_validate(os.getenv('HIBOB_API_KEY', ''))\""
+    }
+}

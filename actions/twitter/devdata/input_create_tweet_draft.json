@@ -1,0 +1,21 @@
+{
+    "inputs": [
+        {
+            "inputName": "input-1",
+            "inputValue": {
+                "tweet_text": "Check this out! 😃 https://sema4.ai"
+            }
+        }
+    ],
+    "metadata": {
+        "actionName": "create_tweet_draft",
+        "actionRelativePath": "actions.py",
+        "schemaDescription": [
+            "tweet_text: string: The text for the tweets. May contain emojis and links. For example \"Check this out! 😃 https://example.com.\""
+        ],
+        "managedParamsSchemaDescription": {},
+        "inputFileVersion": "v3",
+        "kind": "action",
+        "actionSignature": "action/args: 'tweet_text: str'"
+    }
+}

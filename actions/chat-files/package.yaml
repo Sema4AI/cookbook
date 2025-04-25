@@ -1,0 +1,37 @@
+# Required: A short name for the action package
+name: Chat Files
+
+# Required: A description of what's in the action package.
+description: File actions for the chat
+
+# Package version number, recommend using semver.org
+version: 0.1.0
+
+dependencies:
+  conda-forge:
+  - python=3.11.11
+  - uv=0.6.11
+  pypi:
+  - sema4ai-actions=1.3.10
+
+external-endpoints:
+  - name: "Access to the internet"
+    description: "Accesses the internet to retrieve information."
+    rules:
+      - host: "0.0.0.0"
+        port: 443
+
+packaging:
+  # By default, all files and folders in this directory are packaged when uploaded.
+  # Add exclusion rules below (expects glob format: https://docs.python.org/3/library/glob.html)
+  exclude:
+  - ./.git/**
+  - ./.vscode/**
+  - ./devdata/**
+  - ./output/**
+  - ./venv/**
+  - ./.venv/**
+  - ./.DS_store/**
+  - ./**/*.pyc
+  - ./**/*.zip
+  - ./**/.env
