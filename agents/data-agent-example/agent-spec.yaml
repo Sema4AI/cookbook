@@ -1,16 +1,5 @@
 agent-package:
   spec-version: v2
-  exclude:
-    - ./.git/**
-    - ./.vscode/**
-    - ./devdata/**
-    - ./output/**
-    - ./venv/**
-    - ./.venv/**
-    - ./**/.env
-    - ./**/.DS_Store
-    - ./**/*.pyc
-    - ./*.zip
   agents:
   - name: Data Agent Example
     description: Example agent that uses Data Actions
@@ -24,10 +13,21 @@ agent-package:
     action-packages:
     - name: Data Access Queries Template
       organization: MyActions
-      version: 0.0.4
-      path: MyActions/data-access-queries-template
       type: folder
-      whitelist: ''
+      version: 0.0.5
+      whitelist: ""
+      path: MyActions/data-access-queries-template
     knowledge: []
     metadata:
       mode: conversational
+  exclude:
+  - ./.git/**
+  - ./.vscode/**
+  - ./devdata/**
+  - ./output/**
+  - ./venv/**
+  - ./.venv/**
+  - ./**/.env
+  - ./**/.DS_Store
+  - ./**/*.pyc
+  - ./*.zip
