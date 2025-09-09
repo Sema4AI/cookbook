@@ -10,4 +10,4 @@ dependencies:
   - uv=0.6.11
   - pip:
     - robocorp==3.0.0             # https://pypi.org/project/robocorp
-    - sema4ai-http-helper==2.1.0  # https://pypi.org/project/sema4ai-http-helper
+    - sema4ai-http-helper==2.1.1  # https://pypi.org/project/sema4ai-http-helper
