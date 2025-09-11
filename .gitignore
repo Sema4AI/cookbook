@@ -9,3 +9,5 @@ actions/__pycache__
 .idea
 __pycache__
 metadata.json
+.claude/
+CLAUDE.md
